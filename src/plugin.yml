@@ -1,0 +1,30 @@
+name: PetBukkit
+main: com.gmail.oaplugins.PetBukkit
+version: 0.1
+author: OpenAirplugins
+authors: [Arcaniist, KrazyTraynz]
+permissions:
+  tierone.*:
+    description: Allows players to tame tier one mobs.
+    children:
+      tierone.pig: true
+      tierone.sheep: true
+      tierone.cow: true
+      tierone.ocelot: true
+      tierone.chicken : true
+  tierone.pig: 
+    description: Allows players to tame pigs.
+    default: true
+  tierone.sheep:
+    description: Allows players to tame sheep.
+    default: true
+  tierone.cow:
+    description: Allows players to tame cows.
+    default: true
+  tierone.ocelot:
+    description: Allows players to tame ocelots.
+    default: true
+  tierone.chicken:
+    description: Allows players to tame chickens.
+    default: true
+    
