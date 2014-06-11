@@ -54,7 +54,11 @@ public class CustomEntityPig extends EntityPig{
 	 
 	        this.goalSelector.a(0, new PathfinderGoalFloat(this));
 	        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
-	        this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Pig", "")).getLocation()));
+	        try{
+	        	this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Pig", "")).getLocation()));
+	        }catch(NullPointerException e){
+	        	return;
+	        }
 	        this.goalSelector.a(2, new PathfinderGoalPassengerCarrotStick(this, 0.3F));
 	        this.goalSelector.a(3, new PathfinderGoalBreed(this, 1.0D));
 	        this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, Items.CARROT_STICK, false));

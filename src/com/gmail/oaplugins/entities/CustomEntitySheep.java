@@ -52,7 +52,11 @@ public class CustomEntitySheep extends EntitySheep{
 	        }
 	 
 	        this.goalSelector.a(0, new PathfinderGoalFloat(this));
-	        this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Sheep", "")).getLocation()));
+	        try{
+	        	this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Sheep", "")).getLocation()));
+	        }catch(NullPointerException e){
+	        	return;
+	        }
 	        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
 	        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
 	        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.1D, Items.WHEAT, false));

@@ -53,7 +53,11 @@ public class CustomEntityOcelot extends EntityOcelot{
 	            e.printStackTrace();
 	        }
 	 
-	        this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Ocelot", "")).getLocation()));
+	        try{
+	        	this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Ocelot", "")).getLocation()));
+	        }catch(NullPointerException e){
+	        	return;
+	        }
 	        this.goalSelector.a(1, new PathfinderGoalFloat(this));
 	        this.goalSelector.a(2, this.bp);
 	        this.goalSelector.a(3, new PathfinderGoalTempt(this, 0.6D, Items.RAW_FISH, true));

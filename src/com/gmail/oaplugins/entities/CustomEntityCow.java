@@ -51,7 +51,11 @@ public class CustomEntityCow extends EntityCow{
 	        }
 	 
 	        this.goalSelector.a(0, new PathfinderGoalFloat(this));
-	        this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Cow", "")).getLocation()));
+	        try{
+	        	this.goalSelector.a(1, new Pathfinder(this, 1.2F, Bukkit.getServer().getPlayer(this.getCustomName().replace("'s Cow", "")).getLocation()));
+	        }catch(NullPointerException e){
+	        	e.printStackTrace();
+	        }
 	        this.goalSelector.a(1, new PathfinderGoalPanic(this, 2.0D));
 	        this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
 	        this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.25D, Items.WHEAT, false));
