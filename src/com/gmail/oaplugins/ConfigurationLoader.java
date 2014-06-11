@@ -14,6 +14,7 @@ public class ConfigurationLoader {
 	public static String mysql_username = "username";
 	public static String mysql_password = "password";
 	public static String mysql_tablename = "PetBukkit";
+	public static boolean updater_enabled = true;
     
 	public static void load(Plugin plugin) {
         FileConfiguration conf = plugin.getConfig();

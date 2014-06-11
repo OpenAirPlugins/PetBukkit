@@ -27,8 +27,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.gmail.oaplugins.entities.CustomEntityType;
+import com.gmail.oaplugins.events.PlayerTameEntityEvent;
+
 public class Tamer implements Listener{
-	
+		
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void TameEntity(PlayerInteractEntityEvent e) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
@@ -52,7 +55,7 @@ public class Tamer implements Listener{
 								World world = e.getRightClicked().getWorld();
 								Location l = e.getRightClicked().getLocation();
 								CraftWorld w = (CraftWorld)l.getWorld();
-								((CraftChicken)e.getRightClicked()).setHealth(0D); 
+								e.getRightClicked().remove();
 								UUID uuid = PetBukkit.pb.spawnCustomEntity(CustomEntityType.CHICKEN, p.getName(), l, w.getHandle());
 								Entity ent = getFromUUID(uuid, world);
 								Location loc = p.getLocation();
@@ -62,7 +65,7 @@ public class Tamer implements Listener{
 								((Damageable)ent).setMaxHealth(20D);
 								((Damageable)ent).setHealth(20D);
 								Bukkit.getServer().getPluginManager().callEvent(new PlayerTameEntityEvent(p, ent));
-								its.setType(Material.AIR);
+								p.setItemInHand(new ItemStack(Material.AIR, 1));
 								p.updateInventory();
 						}
 					}else{
@@ -84,7 +87,7 @@ public class Tamer implements Listener{
 									World world = e.getRightClicked().getWorld();
 									Location l = e.getRightClicked().getLocation();
 									CraftWorld w = (CraftWorld)l.getWorld();
-									((CraftCow)e.getRightClicked()).setHealth(0D); 
+									e.getRightClicked().remove(); 
 									UUID uuid = PetBukkit.pb.spawnCustomEntity(CustomEntityType.COW, p.getName(), l, w.getHandle());
 									Entity ent = getFromUUID(uuid, world);
 									Location loc = p.getLocation();
@@ -94,7 +97,7 @@ public class Tamer implements Listener{
 									((Damageable)ent).setMaxHealth(20D);
 									((Damageable)ent).setHealth(20D);
 									Bukkit.getServer().getPluginManager().callEvent(new PlayerTameEntityEvent(p, ent));
-									its.setType(Material.AIR);
+									p.setItemInHand(new ItemStack(Material.AIR, 1));
 									p.updateInventory();
 							}
 						}else{
@@ -116,7 +119,7 @@ public class Tamer implements Listener{
 									World world = e.getRightClicked().getWorld();
 									Location l = e.getRightClicked().getLocation();
 									CraftWorld w = (CraftWorld)l.getWorld();
-									((CraftOcelot)e.getRightClicked()).setHealth(0D); 
+									e.getRightClicked().remove();
 									UUID uuid = PetBukkit.pb.spawnCustomEntity(CustomEntityType.OCELOT, p.getName(), l, w.getHandle());
 									Entity ent = getFromUUID(uuid, world);
 									Location loc = p.getLocation();
@@ -126,7 +129,7 @@ public class Tamer implements Listener{
 									((Damageable)ent).setMaxHealth(20D);
 									((Damageable)ent).setHealth(20D);
 									Bukkit.getServer().getPluginManager().callEvent(new PlayerTameEntityEvent(p, ent));
-									its.setType(Material.AIR);
+									p.setItemInHand(new ItemStack(Material.AIR, 1));
 									p.updateInventory();
 							}
 						}else{
@@ -148,7 +151,7 @@ public class Tamer implements Listener{
 									World world = e.getRightClicked().getWorld();
 									Location l = e.getRightClicked().getLocation();
 									CraftWorld w = (CraftWorld)l.getWorld();
-									((CraftPig)e.getRightClicked()).setHealth(0D); 
+									e.getRightClicked().remove();
 									UUID uuid = PetBukkit.pb.spawnCustomEntity(CustomEntityType.PIG, p.getName(), l, w.getHandle());
 									Entity ent = getFromUUID(uuid, world);
 									Location loc = p.getLocation();
@@ -158,7 +161,7 @@ public class Tamer implements Listener{
 									((Damageable)ent).setMaxHealth(20D);
 									((Damageable)ent).setHealth(20D);
 									Bukkit.getServer().getPluginManager().callEvent(new PlayerTameEntityEvent(p, ent));
-									its.setType(Material.AIR);
+									p.setItemInHand(new ItemStack(Material.AIR, 1));
 									p.updateInventory();
 							}
 						}else{
@@ -180,7 +183,7 @@ public class Tamer implements Listener{
 									World world = e.getRightClicked().getWorld();
 									Location l = e.getRightClicked().getLocation();
 									CraftWorld w = (CraftWorld)l.getWorld();
-									((CraftSheep)e.getRightClicked()).setHealth(0D); 
+									e.getRightClicked().remove();
 									UUID uuid = PetBukkit.pb.spawnCustomEntity(CustomEntityType.SHEEP, p.getName(), l, w.getHandle());
 									Entity ent = getFromUUID(uuid, world);
 									Location loc = p.getLocation();
@@ -190,7 +193,7 @@ public class Tamer implements Listener{
 									((Damageable)ent).setMaxHealth(20D);
 									((Damageable)ent).setHealth(20D);
 									Bukkit.getServer().getPluginManager().callEvent(new PlayerTameEntityEvent(p, ent));
-									its.setType(Material.AIR);
+									p.setItemInHand(new ItemStack(Material.AIR, 1));
 									p.updateInventory();
 							}
 						}else{
@@ -212,7 +215,7 @@ public class Tamer implements Listener{
 				e.getRightClicked().setPassenger(e.getPlayer());
 			}
 		}
-	} 
+	}
 	
 	@EventHandler
 	public void setValues(PlayerTameEntityEvent e){
@@ -221,7 +224,8 @@ public class Tamer implements Listener{
 			PetBukkit.pb.ps.setString(2, e.getTamed().getUniqueId().toString());
 			PetBukkit.pb.ps.executeUpdate();
 		} catch (SQLException e1) {
-			e1.printStackTrace(); //Line 146
+			
+			PetBukkit.pb.getLogger().severe(e1.getMessage());
 		}
 	}
 	

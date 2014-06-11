@@ -18,6 +18,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.oaplugins.Updater.UpdateResult;
+import com.gmail.oaplugins.Updater.UpdateType;
+import com.gmail.oaplugins.entities.CustomEntityChicken;
+import com.gmail.oaplugins.entities.CustomEntityCow;
+import com.gmail.oaplugins.entities.CustomEntityOcelot;
+import com.gmail.oaplugins.entities.CustomEntityPig;
+import com.gmail.oaplugins.entities.CustomEntitySheep;
+import com.gmail.oaplugins.entities.CustomEntityType;
+
 public class PetBukkit extends JavaPlugin {
 
 	static PetBukkit pb;
@@ -83,6 +92,15 @@ public class PetBukkit extends JavaPlugin {
 		
 		Bukkit.getServer().getPluginManager().registerEvents(tamer, this);
 		Bukkit.getServer().getPluginManager().registerEvents(cr, this);
+		
+		if(getConfig().getBoolean("Update.Enabled")){
+			Updater updater = new Updater(this, 80883, this.getFile(), UpdateType.NO_DOWNLOAD, true);
+			if (updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
+		    	getLogger().info("A new version of PetBukkit is available! " + updater.getLatestName());
+			}
+		}else{
+			getLogger().warning("Update checker disabled!");
+		}
 		
 		getLogger().info("PetBukkit has been enabled!");
 	}
